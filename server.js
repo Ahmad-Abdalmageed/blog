@@ -4,6 +4,8 @@ const express = require('express');
 const connectDB = require('./Config/config.db');
 const errorHandler = require('./Middleware/errorHandler');
 const { userRouter } = require('./Routes/users');
+const { postRouter } = require('./Routes/posts');
+const authorize = require('./Middleware/auth');
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -12,7 +14,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/api/v1/user', userRouter);
+app.use('/user', userRouter);
+app.use('/posts', authorize, postRouter);
 
 app.use(errorHandler);
 // Server
