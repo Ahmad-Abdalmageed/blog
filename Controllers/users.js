@@ -45,7 +45,21 @@ const authenticateUser = async (userLogin) => {
     return user;
 };
 
+const isAdmin = async (userID) => {
+    const exists = await User.exists({ _id: userID });
+    if (!exists) return new apiError(400, 'User does not exist');
+
+    const user = await User.findById(userID);
+    return user.role === 'ADMIN';
+};
+
+const userExists = async (userID) => {
+    return User.exists({ _id: userID });
+};
+
 module.exports = {
     authenticateUser,
     createUser,
+    isAdmin,
+    userExists
 };
