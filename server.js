@@ -3,9 +3,10 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./Config/config.db');
 const errorHandler = require('./Middleware/errorHandler');
+const authorize = require('./Middleware/auth');
 const { userRouter } = require('./Routes/users');
 const { postRouter } = require('./Routes/posts');
-const authorize = require('./Middleware/auth');
+const { adminRouter } = require('./Routes/adminPanel');
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use('/user', userRouter);
 app.use('/posts', authorize, postRouter);
+app.use('/admin', authorize, adminRouter);
 
 app.use(errorHandler);
 // Server
