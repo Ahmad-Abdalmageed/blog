@@ -1,13 +1,19 @@
-const mongoose = require("mongoose");
+require('dotenv').config();
+
+const { mongoose } = require('mongoose');
+const secrets = require('./config.secrets');
 
 module.exports = async function connectDB() {
     try {
-        await mongoose.connect(process.env.db, {
+        const options = {
             useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log("Connected to DB");
+            useUnifiedTopology: true,
+        };
+        const uri =
+            secrets.node_env === 'dev' ? secrets.db_uri : secrets.db_uri_test;
+        await mongoose.connect(uri, options);
+        console.log(`Connected to ${secrets.node_env} DB ...`);
     } catch (error) {
-        console.log("Could not Connect to DB", error);
+        console.log('Could not Connect to DB', error);
     }
 };
