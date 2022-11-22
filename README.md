@@ -110,21 +110,21 @@ The endpoint then responds with an object with the following description
 	  "body": "POST BODY",
       "status": "POST STATUS",
       "createdAt": "POST CREATION DATE",
-    "createdBy": {
-      "_id": 'USER ID',
-      "email": 'USER EMAIL',
-      "role": 'USER ROLE',
+      "createdBy": {
+      "_id": "USER ID",
+      "email": "USER EMAIL",
+      "role": "USER ROLE"
     },
     "interactions": {
-        "INTERACTION": {COUNT}
+        "INTERACTION": "{COUNT}"
     }
   }],
-  "total": Number,
-  "page": Number,
-  "limit": Number,
-  "totalPages": Number,
-  "hasNextPage": Boolean,
-  "hasPrevPage": Boolean
+  "total": "Number",
+  "page": "Number",
+  "limit": "Number",
+  "totalPages": "Number",
+  "hasNextPage": "Boolean",
+  "hasPrevPage": "Boolean"
 }
 ```
 
@@ -148,18 +148,18 @@ The Endpoint responds with data with the following format
 ```json
 {
 	"posts": {
-        "APPROVED": number,
-        "PENDING": number,
-        "REJECTED": number,
-        "total": number
+        "APPROVED": "Number",
+        "PENDING": "Number",
+        "REJECTED": "uNmber",
+        "total": "Number"
     },
     "comments": {
-        "total": number
+        "total": "Number"
     },
     "interactions": {
-        "interactionsOnPosts": number
-        "interactionsOnComments": number
-        "total": number
+        "interactionsOnPosts": "Nmber",
+        "interactionsOnComments": "Number",
+        "total": "Number"
     }    
 }
 ```
