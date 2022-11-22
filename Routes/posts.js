@@ -1,3 +1,76 @@
+/**
+ * @swagger
+ * components:
+ *   securitySchemas:
+ *     bearerAuth:
+ *       type: http
+ *       schema: bearer
+ *       bearerFormat: JWT
+ *   schemas:
+ *     posts:
+ *        type: object
+ *        required:
+ *          - title
+ *          - body
+ *        properties:
+ *          title:
+ *            type: string
+ *            description: Post Title
+ *          body:
+ *            type: string
+ *            description: Post Body
+ *        example:
+ *          title: Hello World
+ *          body: print('Hello World!!')
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Posts
+ *   description: Posts Endpoint
+ */
+
+/**
+ * @swagger
+ * /posts:
+ *   post:
+ *     summary: Creates a New Post by an Authorized User
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/posts'
+ *     tags: [Posts]
+ *     responses:
+ *       401:
+ *         description: Not Authenticated
+ *       400:
+ *         description: Users Only can Create Posts or User Does not Exist
+ *       200:
+ *         description : The List of the Posts
+ */
+
+/**
+ * @swagger
+ * /posts:
+ *   get:
+ *     summary: Lists all Posts --> Approved Only for Users
+ *     security:
+ *       - bearerAuth: []
+ *     tags: [Posts]
+ *     responses:
+ *       401:
+ *         description: Not Authenticated
+ *       204:
+ *         description: Not Posts
+ *       200:
+ *         description : The List of the Posts
+ */
+
 const express = require('express');
 const { tryCatchWrapExpress } = require('../Utils/wrappers');
 const { isAdmin } = require('../Controllers/users');

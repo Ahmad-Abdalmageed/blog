@@ -7,13 +7,35 @@ const authorize = require('./Middleware/auth');
 const { userRouter } = require('./Routes/users');
 const { postRouter } = require('./Routes/posts');
 const { adminRouter } = require('./Routes/adminPanel');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
 
 const PORT = process.env.PORT || 8000;
 const app = express();
 
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            description: 'Blog API Server Documentation',
+            title: 'Blog API',
+            version: '1.0.0',
+        },
+        servers: [
+            {
+                url: 'http://localhost:8000',
+            },
+        ],
+    },
+    apis: ['./Routes/*.js'],
+};
+
+const specs = swaggerJsDoc(options);
+
 // Routes and Middlewares
 
 app.use(express.json());
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use('/user', userRouter);
 app.use('/posts', authorize, postRouter);

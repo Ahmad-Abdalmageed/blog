@@ -1,3 +1,66 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     users:
+ *        type: object
+ *        required:
+ *          - email
+ *          - password
+ *        properties:
+ *          email:
+ *            type: string
+ *            description: User Email
+ *          password:
+ *            type: string
+ *            description: User Password
+ *        example:
+ *          email: ahmed@deal.com
+ *          password: ahmed123
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: Posts Endpoint
+ */
+
+/**
+ * @swagger
+ * /user/signup:
+ *   post:
+ *     summary: Creates a User
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/users'
+ *     responses:
+ *       200: User Created
+ *       400: User Already Exists/ User Password is wrong
+ */
+
+/**
+ * @swagger
+ * /user/login:
+ *   post:
+ *     summary: logs in a User
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/users'
+ *     responses:
+ *       200: User Logged
+ *       400: User Already Exists/ User Password is wrong
+ */
+
+
 const express = require('express');
 const { authenticateUser, createUser } = require('../Controllers/users');
 const { tryCatchWrapExpress } = require('../Utils/wrappers');
