@@ -14,6 +14,7 @@ const routerCreateUser = tryCatchWrapExpress(async (req, res) => {
         user: {
             id: newUser._id,
             email: newUser.email,
+            role: newUser.role,
         },
     });
 });
